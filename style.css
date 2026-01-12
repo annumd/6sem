@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+/* Header */
+header {
+    background: #020617;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    color: #38bdf8;
+}
+
+nav {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+nav a {
+    color: #e5e7eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: #38bdf8;
+}
+
+/* Sections */
+section {
+    padding: 60px 10%;
+}
+
+.hero {
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 36px;
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    max-width: 750px;
+    margin: auto;
+}
+
+/* Cards */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card {
+    background: #020617;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(56,189,248,0.2);
+}
+
+.card h3 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+/* Upload */
+.upload-box {
+    background: #020617;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+input[type="file"] {
+    margin: 20px 0;
+    padding: 10px;
+}
+
+button {
+    background: #38bdf8;
+    border: none;
+    padding: 12px 28px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    background: #0ea5e9;
+}
+
+/* Footer */
+footer {
+    background: #020617;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #9ca3af;
+}
