@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About - AI Voice Spoof Detection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>About This Project</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
+
+<section>
+    <h2>Project Overview</h2>
+    <p>
+        Voice spoofing is a growing cybersecurity threat where attackers use
+        AI-generated voices to impersonate real people.
+        This project focuses on detecting such spoofed calls using
+        machine learning and signal processing techniques.
+    </p>
+
+    <br>
+
+    <h2>Objectives</h2>
+    <ul>
+        <li>Detect AI-generated and cloned voices</li>
+        <li>Prevent voice-based fraud</li>
+        <li>Improve call authentication security</li>
+    </ul>
+</section>
+
+<footer>
+    © 2026 AI Voice Spoof Detection Project
+</footer>
+
+</body>
+</html>
