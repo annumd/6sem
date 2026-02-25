@@ -77,6 +77,7 @@
         }
     </style>
 </head>
+
 <body class="login-body">
 
 <section class="login-section">
@@ -106,6 +107,12 @@
 </section>
 
 <script>
+// Create default account (for first time use)
+if (!localStorage.getItem("username")) {
+    localStorage.setItem("username", "admin");
+    localStorage.setItem("password", "1234");
+}
+
 let isLogin = true;
 
 function toggleForm() {
