@@ -30,57 +30,61 @@
 
     <br><br>
 
-    <h3>1. Audio Input Collection</h3>
-    <p>
-        The user uploads a voice recording through the web interface. 
-        The system accepts audio files such as WAV or MP3 format.
-    </p>
+    <div class="card-container">
+        <div class="card">
+            <h3>1. Audio Input Collection</h3>
+            <p>
+                The user uploads a voice recording through the web interface. 
+                The system accepts audio files such as WAV or MP3 format.
+            </p>
+        </div>
 
-    <br>
+        <div class="card">
+            <h3>2. Audio Preprocessing</h3>
+            <p>
+                The uploaded audio is cleaned by removing background noise 
+                and normalizing the sound levels to ensure consistency.
+            </p>
+        </div>
 
-    <h3>2. Audio Preprocessing</h3>
-    <p>
-        The uploaded audio is cleaned by removing background noise 
-        and normalizing the sound levels to ensure consistency.
-    </p>
+        <div class="card">
+            <h3>3. Feature Extraction</h3>
+            <p>
+                The system extracts important audio features such as 
+                MFCC (Mel-Frequency Cepstral Coefficients) and spectrograms.
+                These features convert the voice signal into numerical data 
+                that the AI model can understand.
+            </p>
+        </div>
 
-    <br>
+        <div class="card">
+            <h3>4. Deep Learning Model</h3>
+            <p>
+                A trained deep learning model (CNN/LSTM) analyzes the extracted 
+                features and identifies patterns that differentiate genuine 
+                voices from spoofed or AI-generated voices.
+            </p>
+        </div>
 
-    <h3>3. Feature Extraction</h3>
-    <p>
-        The system extracts important audio features such as 
-        MFCC (Mel-Frequency Cepstral Coefficients) and spectrograms.
-        These features convert the voice signal into numerical data 
-        that the AI model can understand.
-    </p>
+        <div class="card">
+            <h3>5. Classification</h3>
+            <p>
+                The model classifies the voice sample as:
+                <ul>
+                    <li>Genuine Voice</li>
+                    <li>Spoofed Voice</li>
+                </ul>
+            </p>
+        </div>
 
-    <br>
-
-    <h3>4. Deep Learning Model</h3>
-    <p>
-        A trained deep learning model (CNN/LSTM) analyzes the extracted 
-        features and identifies patterns that differentiate genuine 
-        voices from spoofed or AI-generated voices.
-    </p>
-
-    <br>
-
-    <h3>5. Classification</h3>
-    <p>
-        The model classifies the voice sample as:
-        <ul>
-            <li>Genuine Voice</li>
-            <li>Spoofed Voice</li>
-        </ul>
-    </p>
-
-    <br>
-
-    <h3>6. Result Display</h3>
-    <p>
-        The final result is displayed instantly on the webpage, 
-        allowing users to quickly identify suspicious or fraudulent calls.
-    </p>
+        <div class="card">
+            <h3>6. Result Display</h3>
+            <p>
+                The final result is displayed instantly on the webpage, 
+                allowing users to quickly identify suspicious or fraudulent calls.
+            </p>
+        </div>
+    </div>
 
 </section>
 </main>
