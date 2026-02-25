@@ -7,6 +7,12 @@
 </head>
 <body>
 
+    <script>
+if(!localStorage.getItem("loggedInUser")){
+    window.location.href = "login.html";
+}
+</script>
+
 <header>
     <h1>AI Voice Spoof Detection System</h1>
     <nav>
@@ -14,10 +20,22 @@
         <a href="howitworks.html">How It Works</a>
         <a href="detect.html">Detect</a>
         <a href="contact.html">Contact</a>
+        <a href="#" onclick="logoutUser()">Logout</a>
     </nav>
 </header>
 
 <main>
+
+<p id="welcomeMsg" style="text-align:center; font-weight:bold;"></p>
+
+<script>
+window.onload = function(){
+    const user = localStorage.getItem("loggedInUser");
+    if(user){
+        document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
+    }
+}
+</script>
 
 <section class="hero">
     <h2>Detect Spoofed Voice Calls Using AI</h2>
@@ -46,6 +64,11 @@
 <footer>
     © 2026 AI Voice Spoof Detection Project
 </footer>
-
+<script>
+function logoutUser(){
+    localStorage.removeItem("loggedInUser");
+    window.location.href = "login.html";
+}
+</script>
 </body>
 </html>
