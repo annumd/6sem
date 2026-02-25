@@ -1,4 +1,4 @@
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 
 
@@ -50,12 +50,10 @@ nav a {
     color: #e5e7eb;
     text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
 }
 
 nav a:hover {
     color: #38bdf8;
-    transform: scale(1.1);
 }
 
 /* Sections */
@@ -133,4 +131,86 @@ footer {
     padding: 20px;
     font-size: 14px;
     color: #9ca3af;
+}
+/* Login Page Full Design */
+.login-body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #020617, #0f172a);
+    margin: 0;
+    height: 100vh;
+}
+
+/* Center the login box */
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Login Card */
+.login-box {
+    background: #020617;
+    padding: 45px 40px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.25);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Title */
+.login-box h2 {
+    color: #38bdf8;
+    margin-bottom: 10px;
+    font-size: 28px;
+}
+
+/* Subtitle */
+.login-box p {
+    color: #9ca3af;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+/* Input Fields */
+.login-box input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    background: #0f172a;
+    color: #e5e7eb;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+/* Input focus glow */
+.login-box input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    outline: none;
+}
+
+/* Button */
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: #38bdf8;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #020617;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Button hover */
+.login-box button:hover {
+    background: #0ea5e9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(14, 165, 233, 0.4);
 }
