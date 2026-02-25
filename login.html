@@ -93,11 +93,13 @@
         </form>
 
         <!-- SIGNUP FORM -->
-        <form id="signupForm" class="hidden" onsubmit="return signupUser()">
-            <input type="text" id="signupUsername" placeholder="Create Username" required>
-            <input type="password" id="signupPassword" placeholder="Create Password" required>
-            <button type="submit">Sign Up</button>
-        </form>
+<form id="signupForm" class="hidden" onsubmit="return signupUser()">
+    <input type="text" id="signupUsername" placeholder="Create Username" required>
+    <input type="password" id="signupPassword" placeholder="Create Password" required>
+    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+<span id="passwordTick" style="color: #38bdf8; margin-left: 5px; display: none;">&#10003;</span>
+    <button type="submit">Sign Up</button>
+</form>
 
         <p class="switch-text">
             <span id="switchMessage">Don't have an account?</span>
@@ -166,6 +168,18 @@ function loginUser() {
         return false;
     }
 }
+// Real-time password match check
+const signupPassword = document.getElementById("signupPassword");
+const confirmPassword = document.getElementById("confirmPassword");
+const passwordTick = document.getElementById("passwordTick");
+
+confirmPassword.addEventListener("input", () => {
+    if (signupPassword.value && confirmPassword.value === signupPassword.value) {
+        passwordTick.style.display = "inline"; // show tick
+    } else {
+        passwordTick.style.display = "none"; // hide tick
+    }
+});
 </script>
 
 </body>
