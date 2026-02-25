@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Contact - AI Voice Spoof Detection</title>
+    <title>Detect - AI Voice Spoof Detection</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
     <h1>AI Voice Spoof Detection System</h1>
-   <nav>
+    <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About</a>
     <a href="howitworks.html">How It Works</a>
@@ -17,29 +17,53 @@
     <a href="contact.html">Contact</a>
 </nav>
 
-
 </header>
 
 <main>
-    <section class="contact-section">
-        <h2>Get in Touch</h2>
-        <p>
-            Have questions about voice spoof detection?  
-            Feel free to contact our team. We're here to help!
-        </p>
+<section>
+    <h2>Voice Spoof Detection</h2>
+    <p>
+        Upload a voice recording below to analyze whether the audio
+        is genuine or spoofed using our AI model.
+    </p>
 
-        <div class="contact-box">
-            <p><strong>Email:</strong> aispoofdetect@example.com</p>
-            <p><strong>Phone:</strong> 7012701513</p>
-            <p><strong>Address:</strong> AI Research Lab, India</p>
+    <div class="upload-box">
+        <label for="audio-file" style="display: inline-block; padding: 10px 20px; background: #38bdf8; color: white; border-radius: 6px; cursor: pointer; margin-bottom: 10px;">Add Audio File</label>
+        <input type="file" id="audio-file" accept="audio/*" style="display: none;"><br>
+        <button onclick="analyzeVoice()">Analyze Voice</button>
+
+        <div class="result-box" id="result-box" style="margin-top: 20px;">
+            <!-- Result will appear here later -->
+            <p><strong>Result:</strong> Waiting for analysis...</p>
         </div>
-    </section>
+    </div>
+</section>
 </main>
+
+<script>
+function analyzeVoice() {
+    const fileInput = document.getElementById('audio-file');
+    const resultBox = document.getElementById('result-box');
+    
+    if (!fileInput.files[0]) {
+        resultBox.innerHTML = '<p><strong>Result:</strong> Please select an audio file first.</p>';
+        return;
+    }
+    
+    resultBox.innerHTML = '<p><strong>Result:</strong> Analyzing...</p>';
+    
+    // Simulate analysis delay
+    setTimeout(() => {
+        const isGenuine = Math.random() > 0.5; // Random for demo
+        const result = isGenuine ? 'Genuine Voice' : 'Spoofed Voice';
+        resultBox.innerHTML = `<p><strong>Result:</strong> ${result}</p>`;
+    }, 2000); // 2 second delay
+}
+</script>
 
 <footer>
     © 2026 AI Voice Spoof Detection Project
 </footer>
 
 </body>
-
 </html>
