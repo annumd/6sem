@@ -46,27 +46,29 @@
 
 <main>
 
-<section>
+<section style="text-align:center; padding:60px 20px;">
 
 <h2>Voice Spoof Detection</h2>
 
-<p>
+<p style="margin-bottom:35px;">
 Upload a voice recording below to analyze whether the audio
 is genuine or spoofed using our AI model.
 </p>
 
 <div class="upload-box">
 
-<label for="audio-file" style="display:inline-block;padding:10px 20px;background:#38bdf8;color:white;border-radius:6px;cursor:pointer;margin-bottom:10px;">
+<label for="audio-file" style="display:inline-block;padding:12px 22px;background:#38bdf8;color:white;border-radius:6px;cursor:pointer;margin-bottom:20px;">
 Add Audio File
 </label>
 
-<input type="file" id="audio-file" accept="audio/*" style="display:none;"><br>
+<input type="file" id="audio-file" accept="audio/*" style="display:none">
+
+<br>
 
 <button onclick="analyzeVoice()">Analyze Voice</button>
 
-<div class="result-box" id="result-box" style="margin-top:20px;">
-<p><strong>Result:</strong> Waiting for analysis...</p>
+<div class="result-box" id="result-box" style="margin-top:25px;">
+<!-- empty until audio is added -->
 </div>
 
 </div>
@@ -78,13 +80,24 @@ Add Audio File
 
 <script>
 
-function analyzeVoice(){
-
 const fileInput=document.getElementById('audio-file');
 const resultBox=document.getElementById('result-box');
 
-if(!fileInput.files[0]){
-resultBox.innerHTML='<p><strong>Result:</strong> Please select an audio file first.</p>';
+/* SHOW MESSAGE AFTER AUDIO IS ADDED */
+
+fileInput.addEventListener("change", function(){
+
+if(fileInput.files.length>0){
+resultBox.innerHTML='<p><strong>Result:</strong> Waiting for analysis...</p>';
+}
+
+});
+
+
+function analyzeVoice(){
+
+if(fileInput.files.length===0){
+alert("Please upload an audio file first.");
 return;
 }
 
