@@ -1,86 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Detect - AI Voice Spoof Detection</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Detect - AI Voice Spoof Detection</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* Loading Spinner */
+
+.spinner{
+    width:40px;
+    height:40px;
+    border:4px solid rgba(255,255,255,0.2);
+    border-top:4px solid #38bdf8;
+    border-radius:50%;
+    animation: spin 1s linear infinite;
+    margin:15px auto;
+}
+
+@keyframes spin{
+    0%{transform:rotate(0deg);}
+    100%{transform:rotate(360deg);}
+}
+
+</style>
+
 </head>
+
 <body>
 
 <header>
-    <h1>AI Voice Spoof Detection System</h1>
-    <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="howitworks.html">How It Works</a>
-    <a href="detect.html">Detect</a>
-    <a href="contact.html">Contact</a>
+<h1>AI Voice Spoof Detection System</h1>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="howitworks.html">How It Works</a>
+<a href="detect.html">Detect</a>
+<a href="contact.html">Contact</a>
 </nav>
 
 </header>
 
+
 <main>
+
 <section>
-    <h2>Voice Spoof Detection</h2>
-    <p>
-        Upload a voice recording below to analyze whether the audio
-        is genuine or spoofed using our AI model.
-    </p>
 
-    <div class="upload-box">
-        <label for="audio-file" style="display: inline-block; padding: 10px 20px; background: #38bdf8; color: white; border-radius: 6px; cursor: pointer; margin-bottom: 10px;">Add Audio File</label>
-        <input type="file" id="audio-file" accept="audio/*" style="display: none;"><br>
-        <button onclick="analyzeVoice()">Analyze Voice</button>
+<h2>Voice Spoof Detection</h2>
 
-        <div class="result-box" id="result-box" style="margin-top: 20px;">
-            <!-- Result will appear here later -->
-            <p><strong>Result:</strong> Waiting for analysis...</p>
-        </div>
-    </div>
+<p>
+Upload a voice recording below to analyze whether the audio
+is genuine or spoofed using our AI model.
+</p>
+
+<div class="upload-box">
+
+<label for="audio-file" style="display:inline-block;padding:10px 20px;background:#38bdf8;color:white;border-radius:6px;cursor:pointer;margin-bottom:10px;">
+Add Audio File
+</label>
+
+<input type="file" id="audio-file" accept="audio/*" style="display:none;"><br>
+
+<button onclick="analyzeVoice()">Analyze Voice</button>
+
+<div class="result-box" id="result-box" style="margin-top:20px;">
+<p><strong>Result:</strong> Waiting for analysis...</p>
+</div>
+
+</div>
+
 </section>
+
 </main>
 
+
 <script>
-function analyzeVoice() {
-    const fileInput = document.getElementById('audio-file');
-    const resultBox = document.getElementById('result-box');
 
-    if (!fileInput.files[0]) {
-        resultBox.innerHTML = '<p><strong>Result:</strong> Please select an audio file first.</p>';
-        return;
-    }
+function analyzeVoice(){
 
-    resultBox.innerHTML = '<p><strong>Result:</strong> Analyzing...</p>';
+const fileInput=document.getElementById('audio-file');
+const resultBox=document.getElementById('result-box');
 
-    const formData = new FormData();
-    formData.append("audio", fileInput.files[0]);
-
-    fetch("https://spoofy-backend-kfvk.onrender.com/detect", {
-        method: "POST",
-        body: formData
-    })
-    .then(async response => {
-        if (!response.ok) {
-            throw new Error("Server error: " + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.result) {
-            resultBox.innerHTML = `<p><strong>Result:</strong> ${data.result}</p>`;
-        } else {
-            resultBox.innerHTML = `<p><strong>Result:</strong> Unexpected response</p>`;
-        }
-    })
-    .catch(error => {
-        console.error(error);
-        resultBox.innerHTML = `<p><strong>Result:</strong> Backend error occurred</p>`;
-    });
+if(!fileInput.files[0]){
+resultBox.innerHTML='<p><strong>Result:</strong> Please select an audio file first.</p>';
+return;
 }
+
+/* show loading spinner */
+
+resultBox.innerHTML=`
+<div class="spinner"></div>
+<p><strong>Analyzing audio...</strong></p>
+`;
+
+const formData=new FormData();
+formData.append("audio",fileInput.files[0]);
+
+fetch("https://spoofy-backend-kfvk.onrender.com/detect",{
+method:"POST",
+body:formData
+})
+
+.then(async response=>{
+if(!response.ok){
+throw new Error("Server error: "+response.status);
+}
+return response.json();
+})
+
+.then(data=>{
+if(data.result){
+resultBox.innerHTML=`<p><strong>Result:</strong> ${data.result}</p>`;
+}else{
+resultBox.innerHTML=`<p><strong>Result:</strong> Unexpected response</p>`;
+}
+})
+
+.catch(error=>{
+console.error(error);
+resultBox.innerHTML=`<p><strong>Result:</strong> Backend error occurred</p>`;
+});
+
+}
+
 </script>
 
+
 <footer>
-    © 2026 AI Voice Spoof Detection Project
+© 2026 AI Voice Spoof Detection Project
 </footer>
 
 </body>
