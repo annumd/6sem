@@ -31,6 +31,6 @@ model = RandomForestClassifier(n_estimators=100)
 model.fit(X_train, y_train)
 
 # save
-joblib.dump(model, "spoof_model.pkl")
+joblib.dump(model, "model.pkl")
 
 print("Model trained and saved!")
