@@ -2,166 +2,117 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Contact - AI Voice Spoof Detection</title>
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Simple FAQ styling (can move to style.css) */
-        .faq-section {
-            width: 80%;
-            margin: 50px auto;
-        }
-
-        .faq-item {
-            margin-bottom: 15px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .faq-question {
-            width: 100%;
-            text-align: left;
-            background: #f5f5f5;
-            border: none;
-            padding: 15px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .faq-answer {
-            display: none;
-            padding: 10px 15px;
-            background: #ffffff;
-        }
-
-        .faq-question.active {
-            background: #e0e0e0;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Contact - AI Voice Spoof Detection</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- Header -->
-    <header>
-        <h1>AI Voice Spoof Detection System</h1>
+<header>
+<h1>AI Voice Spoof Detection System</h1>
 
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="howitworks.html">How It Works</a>
-            <a href="detect.html">Detect</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="howitworks.html">How It Works</a>
+<a href="detect.html">Detect</a>
+<a href="contact.html">Contact</a>
+</nav>
+</header>
 
-    <!-- Contact Section -->
-    <main>
-        <section class="contact-section">
 
-            <div class="contact-wrapper">
+<main>
 
-                <h2>Contact Us</h2>
+<section class="contact-section">
 
-                <p class="contact-intro">
-                    Have questions about our AI Voice Spoof Detection system?
-                    Feel free to reach out to our team through the contact
-                    details below.
-                </p>
+<h2>Contact Us</h2>
 
-                <div class="contact-grid">
+<p class="contact-intro">
+Have questions about our AI Voice Spoof Detection system?
+Feel free to reach out to our team through the contact details below.
+</p>
 
-                    <div class="contact-box">
-                        <h3>Email</h3>
-                        <p>aispoofdetect@example.com</p>
-                    </div>
+<div class="contact-grid">
 
-                    <div class="contact-box">
-                        <h3>Phone</h3>
-                        <p>+91 7012701513</p>
-                    </div>
+<div class="contact-box">
+<h3>Email</h3>
+<p>aispoofdetect@example.com</p>
+</div>
 
-                    <div class="contact-box">
-                        <h3>Address</h3>
-                        <p>AI Research Lab, India</p>
-                    </div>
+<div class="contact-box">
+<h3>Phone</h3>
+<p>+91 7012701513</p>
+</div>
 
-                </div>
+<div class="contact-box">
+<h3>Address</h3>
+<p>AI Research Lab, India</p>
+</div>
 
-            </div>
+</div>
 
-        </section>
-    </main>
+</section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
 
-        <h2>Frequently Asked Questions</h2>
+<section class="faq-section">
 
-        <div class="faq-item">
-            <button class="faq-question">
-                How does the AI detect spoofed voices?
-            </button>
+<h2>Frequently Asked Questions</h2>
 
-            <div class="faq-answer">
-                Our system analyzes audio features and patterns using machine
-                learning to identify whether a voice is genuine or artificially
-                generated.
-            </div>
-        </div>
+<div class="faq-item">
+<button class="faq-question">How does the AI detect spoofed voices?</button>
+<div class="faq-answer">
+Our system analyzes audio features and patterns using machine learning
+to determine whether a voice is real or artificially generated.
+</div>
+</div>
 
-        <div class="faq-item">
-            <button class="faq-question">
-                What audio formats are supported?
-            </button>
+<div class="faq-item">
+<button class="faq-question">What audio formats are supported?</button>
+<div class="faq-answer">
+Currently the system supports WAV and MP3 audio formats.
+</div>
+</div>
 
-            <div class="faq-answer">
-                Currently the system supports common audio formats such as
-                WAV and MP3.
-            </div>
-        </div>
+<div class="faq-item">
+<button class="faq-question">Is my uploaded audio stored permanently?</button>
+<div class="faq-answer">
+No. Uploaded files are only used for analysis and are not stored permanently.
+</div>
+</div>
 
-        <div class="faq-item">
-            <button class="faq-question">
-                Is my uploaded audio stored permanently?
-            </button>
+</section>
 
-            <div class="faq-answer">
-                No. Uploaded files are only used for analysis and are not
-                stored permanently in the system.
-            </div>
-        </div>
+</main>
 
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        © 2026 AI Voice Spoof Detection Project
-    </footer>
+<footer>
+© 2026 AI Voice Spoof Detection Project
+</footer>
 
-    <!-- FAQ Script -->
-    <script>
-        const questions = document.querySelectorAll(".faq-question");
 
-        questions.forEach(question => {
-            question.addEventListener("click", () => {
+<script>
 
-                question.classList.toggle("active");
+const faq = document.querySelectorAll(".faq-question");
 
-                const answer = question.nextElementSibling;
+faq.forEach(btn => {
 
-                if (answer.style.display === "block") {
-                    answer.style.display = "none";
-                } else {
-                    answer.style.display = "block";
-                }
+btn.addEventListener("click", function(){
 
-            });
-        });
-    </script>
+const answer = this.nextElementSibling;
+
+if(answer.style.display === "block"){
+answer.style.display = "none";
+}
+else{
+answer.style.display = "block";
+}
+
+});
+
+});
+
+</script>
 
 </body>
-
 </html>
-
