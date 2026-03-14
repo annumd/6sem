@@ -3,7 +3,7 @@ import numpy as np
 
 def extract_features(file_path):
     try:
-        audio, sr = librosa.load(file_path, sr=16000)
+        audio, sr = librosa.load(file_path, sr=16000, mono=True)
 
         mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=40)
         mfcc_mean = np.mean(mfcc.T, axis=0)
@@ -15,6 +15,9 @@ def extract_features(file_path):
         spectral_mean = np.mean(spectral.T, axis=0)
 
         features = np.hstack([mfcc_mean, chroma_mean, spectral_mean])
+
+        # prevent NaN or infinite values
+        features = np.nan_to_num(features)
 
         return features
 
