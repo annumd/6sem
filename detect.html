@@ -59,13 +59,22 @@ function analyzeVoice() {
         method: "POST",
         body: formData
     })
-    .then(response => response.json())
+    .then(async response => {
+        if (!response.ok) {
+            throw new Error("Server error: " + response.status);
+        }
+        return response.json();
+    })
     .then(data => {
-        resultBox.innerHTML = `<p><strong>Result:</strong> ${data.result}</p>`;
+        if (data.result) {
+            resultBox.innerHTML = `<p><strong>Result:</strong> ${data.result}</p>`;
+        } else {
+            resultBox.innerHTML = `<p><strong>Result:</strong> Unexpected response</p>`;
+        }
     })
     .catch(error => {
-        console.error("Error:", error);
-        resultBox.innerHTML = `<p><strong>Result:</strong> Error connecting to backend.</p>`;
+        console.error(error);
+        resultBox.innerHTML = `<p><strong>Result:</strong> Backend error occurred</p>`;
     });
 }
 </script>
