@@ -23,6 +23,7 @@ def home():
 
 
 @app.route("/detect", methods=["POST"])
+@app.route("/detect", methods=["POST"])
 def detect():
     try:
         if "audio" not in request.files:
@@ -32,17 +33,22 @@ def detect():
         file_path = os.path.join(UPLOAD_FOLDER, file.filename)
         file.save(file_path)
 
+        # extract features
         features = extract_features(file_path)
-        features = features.reshape(1, -1)
+        features = np.array(features).reshape(1, -1)
 
+        # predict
         prediction = model.predict(features)[0]
 
-        result = "Spoofed Voice" if prediction == 1 else "Genuine Voice"
+        if prediction == 1:
+            result = "Spoofed Voice"
+        else:
+            result = "Genuine Voice"
 
         return jsonify({"result": result})
 
     except Exception as e:
+        print("ERROR:", str(e))
         return jsonify({"error": str(e)})
-
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
