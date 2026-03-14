@@ -38,6 +38,8 @@ def detect():
 
         # extract features
         features = extract_features(file_path)
+        if features is None or len(features) == 0:
+            return jsonify({"error": "Audio processing failed"}), 400
         features = np.array(features).reshape(1, -1)
 
         # predict
