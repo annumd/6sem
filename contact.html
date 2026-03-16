@@ -9,6 +9,12 @@
 
 <body>
 
+<script>
+if(!localStorage.getItem("loggedInUser")){
+    window.location.href = "login.html";
+}
+</script>
+
 <header>
 <h1>AI Voice Spoof Detection System</h1>
 
@@ -18,7 +24,9 @@
 <a href="howitworks.html">How It Works</a>
 <a href="detect.html">Detect</a>
 <a href="contact.html">Contact</a>
+<a href="#" onclick="logoutUser()">Logout</a>
 </nav>
+
 </header>
 
 
@@ -111,6 +119,11 @@ answer.style.display = "block";
 });
 
 });
+
+function logoutUser(){
+localStorage.removeItem("loggedInUser");
+window.location.href = "login.html";
+}
 
 </script>
 
