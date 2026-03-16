@@ -17,12 +17,15 @@ def extract_features(file_path):
         features = np.hstack([mfcc_mean, chroma_mean, spectral_mean])
 
         # prevent NaN or infinite values
-        features = np.nan_to_num(features)
+        features = np.hstack([mfcc_mean, chroma_mean, spectral_mean])
 
+        features = np.nan_to_num(features)
+        
         if len(features) != 59:
             return np.zeros(59)
-
+        
         return features
+
 
 
     except Exception as e:
