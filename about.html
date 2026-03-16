@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>About - AI Voice Spoof Detection</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>About - AI Voice Spoof Detection</title>
+<link rel="stylesheet" href="style.css">
 
-    <!-- ===== About Page Table Style (Added Only For Table) ===== -->
-    <style>
-        .about-table {
-            width: 100%;
-            border: 3px solid white;
-            border-collapse: collapse;
-            margin-top: 30px;
-            background: #020617;
-            color: #e5e7eb;
-        }
+<style>
+.about-table {
+    width: 100%;
+    border: 3px solid white;
+    border-collapse: collapse;
+    margin-top: 30px;
+    background: #020617;
+    color: #e5e7eb;
+}
 
-        .about-table td {
-            border: 3px solid white;
-            padding: 25px;
-            line-height: 1.8;
-        }
-    </style>
+.about-table td {
+    border: 3px solid white;
+    padding: 25px;
+    line-height: 1.8;
+}
+</style>
+
 </head>
 
 <body>
 
-<header>
-    <h1>About This Project</h1>
+<script>
+if(!localStorage.getItem("loggedInUser")){
+    window.location.href = "login.html";
+}
+</script>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="howitworks.html">How It Works</a>
-        <a href="detect.html">Detect</a>
-        <a href="contact.html">Contact</a>
-    </nav>
+<header>
+<h1>About This Project</h1>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="howitworks.html">How It Works</a>
+<a href="detect.html">Detect</a>
+<a href="contact.html">Contact</a>
+<a href="#" onclick="logoutUser()">Logout</a>
+</nav>
+
 </header>
 
 <main>
+
 <section>
 
 <table class="about-table">
+
 <tr>
 <td>
 
@@ -65,6 +75,7 @@ encourages safer digital communication practices.
 <br><br>
 
 <strong>Key Objectives:</strong>
+
 <ul>
 <li>Detect AI-generated and cloned voice recordings</li>
 <li>Reduce risks of voice-based fraud</li>
@@ -81,14 +92,23 @@ trust and security in modern communication systems.
 
 </td>
 </tr>
+
 </table>
 
 </section>
+
 </main>
 
 <footer>
-    © 2026 AI Voice Spoof Detection Project
+© 2026 AI Voice Spoof Detection Project
 </footer>
+
+<script>
+function logoutUser(){
+localStorage.removeItem("loggedInUser");
+window.location.href = "login.html";
+}
+</script>
 
 </body>
 </html>
