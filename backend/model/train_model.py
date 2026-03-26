@@ -28,7 +28,9 @@ for label in ["real", "spoof"]:
 X = np.array(X)
 y = np.array(y)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, stratify=y
+)
 
 model = RandomForestClassifier(n_estimators=300, class_weight='balanced')
 model.fit(X_train, y_train)
