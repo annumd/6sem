@@ -3,7 +3,7 @@ import numpy as np
 
 def extract_features(file_path):
     try:
-        audio, sr = librosa.load(file_path, sr=16000, mono=True)
+        audio, sr = librosa.load(file_path, sr=16000, mono=True, duration=5)
 
         mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=40)
         mfcc_mean = np.mean(mfcc.T, axis=0)
