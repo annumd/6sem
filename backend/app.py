@@ -27,13 +27,19 @@ def detect():
 
         file = request.files["audio"]
 
-        if not file.filename.lower().endswith(".wav"):
-            return jsonify({"error": "Only WAV files are supported"}), 400
+        if file.filename == "":
+            return jsonify({"error": "No selected file"}), 400
 
         filename = str(uuid.uuid4()) + "_" + file.filename
         file_path = os.path.join(UPLOAD_FOLDER, filename)
 
         file.save(file_path)
+
+        # ✅ FILE SIZE LIMIT (prevents crash)
+        file_size = os.path.getsize(file_path) / (1024 * 1024)
+        if file_size > 5:
+            os.remove(file_path)
+            return jsonify({"error": "File too large (max 5MB)"}), 400
 
         features = extract_features(file_path)
         features = np.array(features).reshape(1, -1)
@@ -49,7 +55,8 @@ def detect():
 
     except Exception as e:
         print("ERROR:", str(e))
-        return jsonify({"error": str(e)})
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
