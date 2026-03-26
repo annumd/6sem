@@ -30,7 +30,7 @@ y = np.array(y)
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-model = RandomForestClassifier(n_estimators=100)
+model = RandomForestClassifier(n_estimators=300, class_weight='balanced')
 model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
