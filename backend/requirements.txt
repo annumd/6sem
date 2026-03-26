@@ -8,3 +8,5 @@ soundfile
 gunicorn
 scipy
 numba
+pydub
+ffmpeg-python
