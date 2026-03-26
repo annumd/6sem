@@ -18,14 +18,6 @@ for label in ["real", "spoof"]:
         path = os.path.join(folder, file)
 
         features = extract_features(path)
-        if label == "spoof":
-        # duplicate spoof data to balance dataset
-        for _ in range(5):
-            X.append(features)
-            y.append(1)
-else:
-    X.append(features)
-    y.append(0)
 
         if features is None:
             continue
@@ -36,11 +28,10 @@ else:
 X = np.array(X)
 y = np.array(y)
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, stratify=y
-)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-model = RandomForestClassifier(n_estimators=300, class_weight='balanced')
+model = RandomForestClassifier(n_estimators=100)
+
 model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
