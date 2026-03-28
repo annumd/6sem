@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <script>
+<script>
 if(!localStorage.getItem("loggedInUser")){
     window.location.href = "login.html";
 }
@@ -20,6 +20,10 @@ if(!localStorage.getItem("loggedInUser")){
         <a href="howitworks.html">How It Works</a>
         <a href="detect.html">Detect</a>
         <a href="contact.html">Contact</a>
+
+        <!-- THEME BUTTON -->
+        <button onclick="toggleTheme()" id="themeBtn">🌙</button>
+
         <a href="#" onclick="logoutUser()">Logout</a>
     </nav>
 </header>
@@ -27,15 +31,6 @@ if(!localStorage.getItem("loggedInUser")){
 <main>
 
 <p id="welcomeMsg" style="text-align:center; font-weight:bold;"></p>
-
-<script>
-window.onload = function(){
-    const user = localStorage.getItem("loggedInUser");
-    if(user){
-        document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
-    }
-}
-</script>
 
 <section class="hero">
     <h2>Detect Spoofed Voice Calls Using AI</h2>
@@ -63,17 +58,53 @@ window.onload = function(){
 
 </section>
 
-
 </main>
 
 <footer>
     © 2026 AI Voice Spoof Detection Project
 </footer>
+
 <script>
+
+// Welcome message
+window.onload = function(){
+
+    const user = localStorage.getItem("loggedInUser");
+
+    if(user){
+        document.getElementById("welcomeMsg").innerText = "Welcome, " + user + "!";
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("theme");
+
+    if(savedTheme === "light"){
+        document.body.classList.add("light-mode");
+        document.getElementById("themeBtn").innerText="☀️";
+    }
+}
+
+// Logout
 function logoutUser(){
     localStorage.removeItem("loggedInUser");
     window.location.href = "login.html";
 }
+
+// Theme toggle
+function toggleTheme() {
+
+    document.body.classList.toggle("light-mode");
+
+    if(document.body.classList.contains("light-mode")){
+        localStorage.setItem("theme","light");
+        document.getElementById("themeBtn").innerText="☀️";
+    } else {
+        localStorage.setItem("theme","dark");
+        document.getElementById("themeBtn").innerText="🌙";
+    }
+}
+
 </script>
+
 </body>
 </html>
