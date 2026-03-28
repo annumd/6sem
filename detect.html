@@ -6,9 +6,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-
-/* Loading Spinner */
-
 .spinner{
 width:40px;
 height:40px;
@@ -23,7 +20,6 @@ margin:15px auto;
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
 }
-
 </style>
 
 </head>
@@ -38,7 +34,6 @@ window.location.href = "login.html";
 
 <header>
 <h1>AI Voice Spoof Detection System</h1>
-
 <nav>
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
@@ -47,7 +42,6 @@ window.location.href = "login.html";
 <a href="contact.html">Contact</a>
 <a href="#" onclick="logoutUser()">Logout</a>
 </nav>
-
 </header>
 
 <main>
@@ -67,13 +61,7 @@ is genuine or spoofed using our AI model.
 Add Audio File
 </label>
 
-<!-- changed to allow all audio -->
 <input type="file" id="audio-file" accept="audio/*" style="display:none">
-
-<br>
-
-<!-- NEW BUTTON -->
-<button onclick="convertToWav()">Convert to WAV</button>
 
 <br><br>
 
@@ -92,98 +80,34 @@ Add Audio File
 
 const fileInput=document.getElementById('audio-file');
 const resultBox=document.getElementById('result-box');
+const BACKEND_URL = "https://spoofy-backend-kfvk.onrender.com";
 
-/* SHOW MESSAGE AFTER AUDIO IS ADDED */
 fileInput.addEventListener("change", function(){
 if(fileInput.files.length>0){
-resultBox.innerHTML='<p>Audio has been added.</p>';
+resultBox.innerHTML='<p>Audio has been added. Click Analyze Voice to proceed.</p>';
 }
 });
 
-/* NEW: Convert to WAV */
-async function convertToWav(){
-
-if(fileInput.files.length===0){
-alert("Upload an audio file first");
-return;
-}
-
-const file=fileInput.files[0];
-
-const audioContext=new AudioContext();
-const arrayBuffer=await file.arrayBuffer();
-const audioBuffer=await audioContext.decodeAudioData(arrayBuffer);
-
-const wavBlob=bufferToWav(audioBuffer);
-const wavFile=new File([wavBlob],"converted.wav",{type:"audio/wav"});
-
-const dataTransfer=new DataTransfer();
-dataTransfer.items.add(wavFile);
-fileInput.files=dataTransfer.files;
-
-resultBox.innerHTML='<p>Converted to WAV successfully!</p>';
-}
-
-/* helper function */
-function bufferToWav(buffer){
-const numOfChan=buffer.numberOfChannels;
-const sampleRate=buffer.sampleRate;
-const length=buffer.length*numOfChan*2+44;
-const bufferArray=new ArrayBuffer(length);
-const view=new DataView(bufferArray);
-
-let offset=0;
-
-function writeString(s){
-for(let i=0;i<s.length;i++){
-view.setUint8(offset++,s.charCodeAt(i));
-}
-}
-
-function writeUint32(d){view.setUint32(offset,d,true);offset+=4;}
-function writeUint16(d){view.setUint16(offset,d,true);offset+=2;}
-
-writeString("RIFF");
-writeUint32(length-8);
-writeString("WAVE");
-
-writeString("fmt ");
-writeUint32(16);
-writeUint16(1);
-writeUint16(numOfChan);
-writeUint32(sampleRate);
-writeUint32(sampleRate*numOfChan*2);
-writeUint16(numOfChan*2);
-writeUint16(16);
-
-writeString("data");
-writeUint32(length-offset-4);
-
-const channels=[];
-for(let i=0;i<numOfChan;i++){
-channels.push(buffer.getChannelData(i));
-}
-
-for(let i=0;i<buffer.length;i++){
-for(let j=0;j<numOfChan;j++){
-let sample=Math.max(-1,Math.min(1,channels[j][i]));
-sample=sample<0?sample*0x8000:sample*0x7FFF;
-view.setInt16(offset,sample,true);
-offset+=2;
-}
-}
-
-return new Blob([view],{type:"audio/wav"});
-}
-
-function analyzeVoice(){
+async function analyzeVoice(){
 
 if(fileInput.files.length===0){
 alert("Please upload an audio file first.");
 return;
 }
 
-/* show loading spinner */
+// ✅ Step 1 — Wake up backend first
+resultBox.innerHTML=`
+<div class="spinner"></div>
+<p><strong>Waking up server, please wait...</strong></p>
+`;
+
+try{
+await fetch(BACKEND_URL + "/ping");
+} catch(e){
+// ping failed but continue anyway
+}
+
+// ✅ Step 2 — Now analyze
 resultBox.innerHTML=`
 <div class="spinner"></div>
 <p><strong>Analyzing audio...</strong></p>
@@ -192,24 +116,34 @@ resultBox.innerHTML=`
 const formData=new FormData();
 formData.append("audio",fileInput.files[0]);
 
-fetch("https://spoofy-backend-kfvk.onrender.com/detect",{
+fetch(BACKEND_URL + "/detect",{
 method:"POST",
 body:formData
 })
 
 .then(async response=>{
 const data=await response.json();
-
 if(!response.ok){
 throw new Error(data.error || "Server error");
 }
-
 return data;
 })
 
 .then(data=>{
 if(data.result){
-resultBox.innerHTML=`<p><strong>Result:</strong> ${data.result}</p>`;
+
+// ✅ Confidence percentage display
+const confidence = data.confidence ? `(${data.confidence}% confidence)` : "";
+const isGenuine = data.result === "Genuine Voice";
+const color = isGenuine ? "#22c55e" : "#ef4444";
+const icon = isGenuine ? "✅" : "🚨";
+
+resultBox.innerHTML=`
+<p style="font-size:1.3rem; color:${color};">
+<strong>${icon} Result: ${data.result} ${confidence}</strong>
+</p>
+`;
+
 }else{
 resultBox.innerHTML=`<p><strong>Result:</strong> Unexpected response</p>`;
 }
@@ -217,7 +151,7 @@ resultBox.innerHTML=`<p><strong>Result:</strong> Unexpected response</p>`;
 
 .catch(error=>{
 console.error(error);
-resultBox.innerHTML=`<p><strong>Error:</strong> ${error.message}</p>`;
+resultBox.innerHTML=`<p style="color:#ef4444;"><strong>Error:</strong> ${error.message}</p>`;
 });
 
 }
